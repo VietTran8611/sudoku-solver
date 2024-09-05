@@ -14,10 +14,10 @@ export const Board = () => {
     if(num==0 || num>9 || num<0){
         newBoard[i][j] = 0;
     }else{
-        newBoard[i][j] = num;
+        newBoard[i][j] = parseInt(num);
     }
     setBoard(newBoard);
-    console.log(board[i][j])
+    console.log(board)
   }
 
   const solve = ()=>{
@@ -57,8 +57,8 @@ export const Board = () => {
     if (board[row][column] !== 0) return dfs(board, row, column + 1);
   
     for (let i = 1; i < 10; i++) {
-      if (isValid(board, row, column, i.toString())) {
-        board[row][column] = i.toString();
+      if (isValid(board, row, column, i)) {
+        board[row][column] = i;
         if (dfs(board, row, column + 1)) return true;
         board[row][column] = 0;
       }
