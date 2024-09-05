@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box } from './Box'
 
 export const Board = () => {
-  let clearArr =[[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."]]
+  let clearArr =[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
   let arr = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
   const [board,setBoard] =useState(clearArr)
 
@@ -12,7 +12,7 @@ export const Board = () => {
     }
     const newBoard = [...board];
     if(num==0 || num>9 || num<0){
-        newBoard[i][j] = '.';
+        newBoard[i][j] = 0;
     }else{
         newBoard[i][j] = num;
     }
@@ -54,13 +54,13 @@ export const Board = () => {
   let dfs = (board, row, column) => {
     if (row === 9) return true;
     if (column === 9) return dfs(board, row + 1, 0);
-    if (board[row][column] !== '.') return dfs(board, row, column + 1);
+    if (board[row][column] !== 0) return dfs(board, row, column + 1);
   
     for (let i = 1; i < 10; i++) {
       if (isValid(board, row, column, i.toString())) {
         board[row][column] = i.toString();
         if (dfs(board, row, column + 1)) return true;
-        board[row][column] = '.';
+        board[row][column] = 0;
       }
     }
   
@@ -74,7 +74,7 @@ export const Board = () => {
   return (
     <main>
         <div className='board'>
-            {board.map((x,i)=> x.map((y,j)=> <Box num={y} col={i} row={j} handleUpdate ={handleUpdate}/> ))}
+            {board.map((x,i)=> x.map((y,j)=> <Box num={y} row={i} col={j} handleUpdate ={handleUpdate}/> ))}
         </div>
         <button onClick={()=>{solve()}} className='btn'>Solve</button>
         <button onClick={refreshPage} className='btn'>Reset</button>

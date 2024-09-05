@@ -139,3 +139,11 @@ h1 {
   text-align: center;
   margin-bottom: .5em;
 }
+
+.col2,.col5{
+  border-right: 2px solid rgb(49, 84, 158);
+}
+
+.row2,.row5{
+  border-bottom: 2px solid rgb(49, 84, 158);
+}
