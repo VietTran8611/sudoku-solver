@@ -17,12 +17,10 @@ export const Board = () => {
         newBoard[i][j] = parseInt(num);
     }
     setBoard(newBoard);
-    console.log(board)
   }
 
   const solve = ()=>{
     setBoard((num) => [...solveSudoku(num)]);
-    console.log(board)
   }
 
   var solveSudoku = function (board) {
